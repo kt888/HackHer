@@ -1,0 +1,229 @@
+<!--
+ Created with Simple Form Builder
+ www.simpleformbuilder.com
+ -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <link href="css/style.css" media="screen" rel="stylesheet" type="text/css"/>
+    <link href="css/uniform.css" media="screen" rel="stylesheet" type="text/css"/>
+    
+    <script type="text/javascript" src="js/jquery/js/jquery-1.9.1.js"></script>
+    <script type="text/javascript" src="js/jquery/js/jquery-ui-1.10.3.custom.js"></script>
+ 
+<script type="text/javascript">
+
+
+$(document).ready(function () {
+
+// initialieze options
+
+// <to Alfredo>: Edit data shown in selector
+selectValues1 = { "1": "Industry", "2": "Business"};
+selectValues2 = { "1": "Software", "2": "Robotics","3":"Brand Management","4":"Media Market"};
+selectValues3 = { "1": "Google", "2": "LinkedIn", "3": "Microsoft", "4":"Siemens","5":"City Bank","6":"Wells Fargo"};
+selectValues4 = { "1": "America", "2": "Japan", "3": "China", "4":"India"};
+
+var map_data = { "1":
+                      {"1":"Software","2":"Robotics"},
+                 "2":
+                      {"1":"Brand Management","2":"Media Market"},
+               };
+
+
+$.each(selectValues1, function(key, value) {   
+     $('#field1')
+         .append($("<option></option>")
+         .attr("value",key)
+         .text(value)); 
+});
+
+
+
+$( "#field1" ).change(function() {
+
+	var selected= $( "#field1" ).val();
+	$('#field2').empty();
+	$.each(map_data[selected], function(key, value) {   
+		console.log(key, value);
+     		$('#field2')
+         	.append($("<option></option>")
+         	.attr("value",key)
+         	.text(value)); 
+	});
+
+	$("#field2").val(1).change();
+
+});
+
+var map_2to3 = { "1":
+                      {"1":"Google","2":"LinkedIn"},
+                 "2":
+                      {"1":"Microsoft","2":"Siemens"},
+                 "3":
+                      {"1":"City Bank","2":"Wells Fargo"},
+               };
+
+$( "#field2" ).change(function() {
+
+	var selected= $( "#field2" ).val();
+	$('#field3').empty();
+	$.each(map_2to3[selected], function(key, value) {   
+		console.log(key, value);
+     		$('#field3')
+         	.append($("<option></option>")
+         	.attr("value",key)
+         	.text(value)); 
+	});
+
+	$("#field3").val(1).change();
+
+});
+
+var map_3to4 = { "1":
+                      {"1":"America","2":"Japan","3":"China","4":"India"},
+                 "2":
+                      {"1":"America","2":"Japan","3":"China","4":"India"},
+                 "3":
+                      {"1":"America","2":"Japan","3":"China","4":"India"},
+                 "4":
+                      {"1":"America","2":"Japan","3":"China","4":"India"},
+               };
+
+$( "#field3" ).change(function() {
+
+	var selected= $( "#field3" ).val();
+	$('#field4').empty();
+	$.each(map_3to4[selected], function(key, value) {   
+		console.log(key, value);
+     		$('#field4')
+         	.append($("<option></option>")
+         	.attr("value",key)
+         	.text(value)); 
+	});
+
+	$("#field4").val(1).change();
+
+});
+
+
+/*$.each(selectValues4, function(key, value) {   
+     $('#field4')
+         .append($("<option></option>")
+         .attr("value",key)
+         .text(value)); 
+});*/
+	   
+$("#submitButton").click(function() {
+
+// <to Alfredo>: Edit URL
+    var url = "http://your.destination.com";
+
+// <to Alfredo>: you can try both outputs. Select whichever you like.
+
+//    var output = $("#form").serialize();
+    var output = $("#field1  option:selected").text() + "," + 
+	$("#field2  option:selected").text()  + "," + 
+	$("#field3  option:selected").text()  + "," + 
+	$("#field4  option:selected").text();
+    
+    $("#output-text").text("Sent: " + output);
+
+    $.ajax({
+           type: "POST",
+           url: url,
+           data: output, 
+           success: function(data)
+           {
+               alert("Sent: " + data); // show response from the php script.
+           }
+         });
+
+    return false; // avoid to execute the actual submit of the form.
+});
+
+
+});
+</script>
+
+</head>
+
+
+<body>
+<div class="header-img"><img src="images/black.jpg" alt="" height="80"
+ width="2300"></div>
+ <div class="header-img"><img src="images/img.jpg" alt="" height="500"
+ width="141" style="float: right;></div>
+<div class="header-img"><img src="images/logo.jpg" alt="" height="140"
+ width="500"></div>
+ 
+</div>
+
+
+<div class="TTWForm-container" >
+     
+     
+     <form id="form" class="TTWForm" method="post" novalidate="">
+
+          
+          <div id="field1-container" class="field f_25">
+               <label for="field1">
+                    
+               </label>
+               <select name="field1" id="field1" required="required">
+		    <option>
+                         Interest Area:
+                    </option>
+               </select>
+          </div>
+
+	  
+          <div id="field2-container" class="field f_25">
+               <label for="field2">
+                    
+               </label>
+               <select name="field2" id="field2" required="required">
+		    <option>
+                         Job Title:
+                    </option>
+               </select>
+          </div>
+          
+          
+          <div id="field3-container" class="field f_25">
+               <label for="field3">
+                    
+               </label>
+               <select name="field3" id="field3" required="required">
+		    <option>
+                         Ideal Company:
+                    </option>
+               </select>
+          </div>
+          
+          
+          <div id="field4-container" class="field f_25">
+               <label for="field4">
+                    
+               </label>
+               <select name="field4" id="field4" required="required">
+                    <option>
+                         Ideal Location:
+                    </option>
+               </select>
+          </div>
+
+          
+          <div id="output-text" style="float:right; margin-right: 8%;"></div>
+          <div id="form-submit" class="field f_100 clearfix submit">
+               <input id="submitButton" type="button" value="Analyse">
+          </div>
+     </form>
+</div>
+
+
+</body>
+</html>
