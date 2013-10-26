@@ -64,7 +64,7 @@
 .f_100 {
     width: 96%;
     display: inline;
-    float: left;
+    float: right;
     margin-left: 2%;
     margin-right: 2%; /* jquery ui resize grid hack - not sure why */
 }
